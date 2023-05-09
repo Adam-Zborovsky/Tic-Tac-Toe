@@ -6,8 +6,10 @@ class X(Piece):
         super().__init__(x, y)
 
     def draw(self, screen): 
-        left_start, left_end, right_start, right_end, width = (75, 75), (75, 75), (250, 75), (250, 75) ,30
+        left_start, right_start, width = (self.x-87.5, self.y-87.5), (self.x+87.5, self.y-87.5), 30
+        left_end, right_end = left_start, right_start 
         i = 1
+        #120.2
         while i < 175.1:
             pygame.draw.line(screen, (255, 255, 255), left_start, (left_end[0]+i,left_end[1]+i), width)
             pygame.draw.line(screen, (255, 255, 255), right_start, (right_end[0]-i,right_end[1]+i), width)
