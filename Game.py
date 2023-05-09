@@ -56,8 +56,9 @@ def game():
                     else:
                         x = Circle(grid[pos_x],grid[pos_y])
                         turn += 1
+                    board.add_piece(x)
                     x.draw(screen)
-
+            board.check_win()
 
 if __name__ == '__main__':
     game()
