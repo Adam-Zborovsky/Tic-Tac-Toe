@@ -1,6 +1,5 @@
 from Pieces import Piece
 import pygame
-import time
 
 class Circle(Piece):
     def __init__(self, x, y):
