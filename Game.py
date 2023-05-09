@@ -2,7 +2,7 @@ import pygame
 from Boards import Board
 from Circles import Circle
 from Xs import X
-SCREEN_SIZE = (900, 800)
+SCREEN_SIZE = (800, 800)
 
 
 def game():
