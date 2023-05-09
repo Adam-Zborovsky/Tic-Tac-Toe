@@ -12,4 +12,4 @@ class Piece:
         self.y = y
 
     def __str__(self):
-        return f'Location :{self.x}, {self.y}'
+        return self.__class__.__name__

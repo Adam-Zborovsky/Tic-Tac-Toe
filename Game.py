@@ -1,6 +1,6 @@
 import pygame
 from Boards import Board
-from Circles import Circle
+from Os import O
 from Xs import X
 SCREEN_SIZE = (800, 800)
 
@@ -38,8 +38,6 @@ def game():
     pygame.display.flip()
     board = Board()
     board.draw(screen)
-    grid = ['', 160, 400, 635]
-    pieces = []
 
     while running:
         for event in pygame.event.get():
@@ -49,16 +47,14 @@ def game():
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 pos_x, pos_y = set_position()
-                if pos_x and pos_y:
-                    if turn:
-                        x = X(grid[pos_x],grid[pos_y])
-                        turn -= 1
+                if pos_x is not None and pos_y is not None:
+                    if turn%2 == 1:
+                        x = X(pos_x,pos_y)
                     else:
-                        x = Circle(grid[pos_x],grid[pos_y])
+                        x = O(pos_x,pos_y)
+                    if board.add_piece(x, screen):
                         turn += 1
-                    board.add_piece(x)
-                    x.draw(screen)
-            board.check_win()
+                        x.draw(screen)
 
 if __name__ == '__main__':
     game()

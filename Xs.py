@@ -6,7 +6,9 @@ class X(Piece):
         super().__init__(x, y)
 
     def draw(self, screen): 
-        left_start, right_start, width = (self.x-87.5, self.y-87.5), (self.x+87.5, self.y-87.5), 30
+        grid = ['', 160, 400, 635]
+        point = grid[self.x], grid [self.y]
+        left_start, right_start, width = (point[0]-87.5, point[1]-87.5), (point[0]+87.5, point[1]-87.5), 30
         left_end, right_end = left_start, right_start 
         i = 1
         #120.2
