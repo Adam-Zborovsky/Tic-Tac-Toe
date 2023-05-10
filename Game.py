@@ -1,4 +1,5 @@
 import pygame
+import time
 from Boards import Board
 from Os import O
 from Xs import X
@@ -26,7 +27,7 @@ def set_position():
     if 525 < mouse_x < 750 and 525 < mouse_y < 750:
         return (3,3)
     else:
-        return None
+        return (0,0)
 
 
 def game():
@@ -52,9 +53,19 @@ def game():
                         x = X(pos_x,pos_y)
                     else:
                         x = O(pos_x,pos_y)
-                    if board.add_piece(x, screen):
+                    valid = board.add_piece(x, screen)
+                    if valid:
                         turn += 1
                         x.draw(screen)
+                        if valid == 'X'  or valid == 'O':
+                            time.sleep(0.7)
+                            board.win(screen, valid)
+                            time.sleep(5)
+                            screen.fill((0, 0, 0))
+                            pygame.display.flip()
+                            board = Board()
+                            board.draw(screen)
+
 
 if __name__ == '__main__':
     game()

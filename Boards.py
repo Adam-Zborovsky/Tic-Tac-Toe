@@ -1,4 +1,5 @@
 import pygame
+import time
 
 
 class Board:
@@ -33,8 +34,9 @@ class Board:
             for i, pos in enumerate(self.grid):
                 if p.get_location() == pos:
                     self.grid[i] = str(p)
-        if self.check_win():
-            self.win(screen)
+        win = self.check_win() 
+        if win:
+            return win
 
         return True
     
@@ -49,17 +51,22 @@ class Board:
 
         for row in rows:
             if row[0] == row[1] == row[2]:
-                return True 
+                return row[0] 
         for col in cols:
             if col[0] == col[1] == col[2]:
-                return True
+                return col[0]
         for dia in diag:
             if dia[0] == dia[1] == dia[2]:
-                return True
+                return dia[0] 
         return False
         
-    def win(self, screen):
-        pygame.draw.circle(screen, (0, 255, 0), (400, 400), 400)
+    def win(self, screen, winner):
+        pygame.font.init()
+        screen.blit(pygame.font.SysFont("David", 200).render(f'{winner} Won', True, (255, 255, 255)), (125, 100))
+        pygame.display.update()
 
     def tie(self, screen):
-        pygame.draw.circle(screen, (255, 0, 0), (400, 400), 400)
+        time.sleep(1)
+        pygame.font.init()
+        screen.blit(pygame.font.SysFont("David", 200).render('Its a Tie', True, (255, 255, 255)), (125, 100))
+        pygame.display.update()
