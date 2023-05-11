@@ -32,7 +32,7 @@ def set_position():
 
 def game():
     running = True
-    turn = 0
+    turn = 1
     screen = pygame.display.set_mode(SCREEN_SIZE)
     pygame.display.set_caption('Tic Tac Toe')
     screen.fill((0, 0, 0))
@@ -57,12 +57,26 @@ def game():
                     if valid:
                         turn += 1
                         x.draw(screen)
-                        if valid == 'X'  or valid == 'O':
-                            time.sleep(0.7)
-                            board.win(screen, valid)
-                            time.sleep(5)
+                        if valid == 'X' or valid == 'O':
+                            time.sleep(1)
                             screen.fill((0, 0, 0))
                             pygame.display.flip()
+                            board.win(screen, valid)
+                            time.sleep(2)
+                            screen.fill((0, 0, 0))
+                            pygame.display.flip()
+                            board = Board()
+                            board.draw(screen)
+                            
+                        if valid == 'tie':
+                            time.sleep(3)
+                            screen.fill((0, 0, 0))
+                            pygame.display.flip()
+                            board.tie(screen)
+                            
+                            screen.fill((0, 0, 0))
+                            pygame.display.flip()
+                            time.sleep(2)
                             board = Board()
                             board.draw(screen)
 

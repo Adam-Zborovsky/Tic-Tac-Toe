@@ -28,7 +28,7 @@ class Board:
         if piece.get_location() not in self.grid:
             return False
         if len(self.pieces) == 8:
-            self.tie(screen)
+            return 'tie'
         self.pieces.append(piece)
         for p in self.pieces:
             for i, pos in enumerate(self.grid):
