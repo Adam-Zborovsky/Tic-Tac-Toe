@@ -53,30 +53,25 @@ def game():
                         x = X(pos_x,pos_y)
                     else:
                         x = O(pos_x,pos_y)
-                    valid = board.add_piece(x, screen)
-                    if valid:
+                    win = board.add_piece(x, screen)
+                    if win:
+                        print(win)
                         turn += 1
                         x.draw(screen)
-                        if valid == 'X' or valid == 'O':
+                        if win is not True and (win[0] == 'X' or win[0] == 'O' or win[0] == 'tie'):
+                            print('here')
                             time.sleep(1)
+                            grid = ['', 160, 400, 635]
+                            start, end, width = (grid[win[0][1].get_location()[0]], grid[win[0][1].get_location()[1]]), (grid[win[2][1].get_location()[0]], grid[win[2][1].get_location()[1]]), 40
+                            pygame.draw.line(screen, (255, 255, 255), start, end, width)
+                            pygame.draw.circle(screen, (255, 255, 255), (start[0], start[1]), width//2)
+                            pygame.draw.circle(screen, (255, 255, 255), (end[0], end[1]), width//2)
                             screen.fill((0, 0, 0))
                             pygame.display.flip()
-                            board.win(screen, valid)
+                            eval(f'board.{win[0]}(screen)')
                             time.sleep(2)
                             screen.fill((0, 0, 0))
                             pygame.display.flip()
-                            board = Board()
-                            board.draw(screen)
-                            
-                        if valid == 'tie':
-                            time.sleep(3)
-                            screen.fill((0, 0, 0))
-                            pygame.display.flip()
-                            board.tie(screen)
-                            
-                            screen.fill((0, 0, 0))
-                            pygame.display.flip()
-                            time.sleep(2)
                             board = Board()
                             board.draw(screen)
 

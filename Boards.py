@@ -33,9 +33,10 @@ class Board:
         for p in self.pieces:
             for i, pos in enumerate(self.grid):
                 if p.get_location() == pos:
-                    self.grid[i] = str(p)
-        win = self.check_win() 
-        if win:
+                    self.grid[i] = (str(p), p)
+        
+        win = self.check_win()
+        if win and not isinstance(win[0][1], int) and not isinstance(win[1][1], int) and not isinstance(win[2][1], int):
             return win
 
         return True
@@ -50,23 +51,27 @@ class Board:
             cols.append((self.grid[i], self.grid[i+3], self.grid[i+6]))
 
         for row in rows:
-            if row[0] == row[1] == row[2]:
-                return row[0] 
+            if row[0][0] == row[1][0] == row[2][0]:
+                return row
         for col in cols:
-            if col[0] == col[1] == col[2]:
-                return col[0]
+            if col[0][0] == col[1][0] == col[2][0]:
+                return col
         for dia in diag:
-            if dia[0] == dia[1] == dia[2]:
-                return dia[0] 
+            if dia[0][0] == dia[1][0] == dia[2][0]:
+                return dia
         return False
         
-    def win(self, screen, winner):
+    def win(self, screen):
         pygame.font.init()
-        screen.blit(pygame.font.SysFont("David", 200).render(f'{winner} Won', True, (255, 255, 255)), (125, 100))
+        screen.blit(pygame.font.SysFont("David", 200).render('O Won', True, (255, 255, 255)), (115, 100))
         pygame.display.update()
+        
+    def X(self, screen):
+        pygame.font.init()
+        screen.blit(pygame.font.SysFont("David", 200).render('X Won', True, (255, 255, 255)), (115, 100))
+        pygame.display.flip()
 
     def tie(self, screen):
-        time.sleep(1)
         pygame.font.init()
-        screen.blit(pygame.font.SysFont("David", 200).render('Its a Tie', True, (255, 255, 255)), (125, 100))
-        pygame.display.update()
+        screen.blit(pygame.font.SysFont("David", 200).render('Its a Tie', True, (255, 255, 255)), (100, 100))
+        pygame.display.flip()
