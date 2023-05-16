@@ -53,23 +53,14 @@ def game():
                         x = X(pos_x,pos_y)
                     else:
                         x = O(pos_x,pos_y)
-                    win = board.add_piece(x, screen)
-                    if win:
-                        print(win)
+                    valid = board.add_piece(x)
+                    if valid:
                         turn += 1
                         x.draw(screen)
-                        if win is not True and (win[0] == 'X' or win[0] == 'O' or win[0] == 'tie'):
-                            print('here')
-                            time.sleep(1)
-                            grid = ['', 160, 400, 635]
-                            start, end, width = (grid[win[0][1].get_location()[0]], grid[win[0][1].get_location()[1]]), (grid[win[2][1].get_location()[0]], grid[win[2][1].get_location()[1]]), 40
-                            pygame.draw.line(screen, (255, 255, 255), start, end, width)
-                            pygame.draw.circle(screen, (255, 255, 255), (start[0], start[1]), width//2)
-                            pygame.draw.circle(screen, (255, 255, 255), (end[0], end[1]), width//2)
-                            screen.fill((0, 0, 0))
-                            pygame.display.flip()
-                            eval(f'board.{win[0]}(screen)')
-                            time.sleep(2)
+                        if valid == 'win' or valid == 'tie':
+                            print(valid)
+                            eval(f'board.{valid}(screen)')
+                            time.sleep(1.5)
                             screen.fill((0, 0, 0))
                             pygame.display.flip()
                             board = Board()
