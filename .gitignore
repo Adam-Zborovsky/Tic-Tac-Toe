@@ -1,4 +1,29 @@
-/venv
-/build
-/dist
-/game.spec
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.spec
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pygame
+*.log
